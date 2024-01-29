@@ -22,7 +22,7 @@ def merge_sort(input_array):
     if len(input_array) > 1:
         left_arr = input_array[:len(input_array)//2]
         right_arr = input_array[len(input_array)//2:]
-        
+
         #recursion
         merge_sort(left_arr)
         merge_sort(right_arr)
@@ -38,10 +38,61 @@ def merge_sort(input_array):
                 i += 1
             else:
                 input_array[k] = right_arr[j]
+                j += 1
+
+            k += 1
+
+        while i < len(left_arr):
+            input_array[k] = left_arr[i]
+            i += 1
+            k += 1
+
+        while j < len(right_arr):
+            input_array[k] = right_arr[j]
+            j += 1
+            k += 1
+
+# Quick Sort
+def quick_sort(input_array, left, right):
+    if left < right:
+        partition_pos = partition(input_array, left, right)
+        quick_sort(input_array, left, partition_pos - 1)
+        quick_sort(input_array, partition_pos + 1, right)
+
+
+# Partition for quick sort
+def partition(input_array, left, right):
+    i = left
+    j = right - 1
+    pivot = input_array[right]
+
+    while i < j:
+        while i < right and input_array[i] < pivot:
+            i += 1
+        while j > left and input_array[j] >= pivot:
+            j -= 1
+
+        if i < j:
+            input_array[i], input_array[j] = input_array[j], input_array[i]
+
+    if input_array[i] > pivot:
+        input_array[i], input_array[right] = input_array[right], input_array[i]
+
+    return i
 
 
 
+
+
+
+# Main Logic -- Init testing examples for each algo function
+# To do:
+#   - Add time logging to see which algorithms perform better
 
 arr = [2, 6, 5, 1, 3, 4]
-selection_sort(arr)
+merge_sort(arr)
+print(arr)
+
+arr = [22, 11, 88, 66, 55, 77, 44, 4]
+quick_sort(arr, 0, len(arr) - 1)
 print(arr)
