@@ -1,0 +1,4 @@
+cd Documents/"C++ Projects"/Sandbox
+
+g++ main.cpp -o main 
+g++ Documents/"C++ Projects"/Sandbox/main.cpp -o main 
