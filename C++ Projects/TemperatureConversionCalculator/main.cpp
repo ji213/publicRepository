@@ -1,10 +1,8 @@
 // Temperature conversion program
-// 
+// Version 1.0
 // Take user input in either F or C and convert it to the other unit of measurement
 
-
-//****ERROR LOG********
-// Add error handling for all errors listed
+// Error Log: 
 
 
 
