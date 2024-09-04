@@ -1,6 +1,10 @@
-//Number Guessing Game v1.0
+//Number Guessing Game v1.1
 
 //ERROR LOG/ THINGS TO ADD
+// Error handling for incorrect character supplied?
+// Go through less expected workflow outcomes 
+///  to see what other errors or issues need to be handled
+// Maybe store high scores associated with user accounts?
 // Time logging
 
 
@@ -71,18 +75,32 @@ int main() {
 
         if(highScore == 0){
             // If highScore == 0, take value from tries
+            std::cout << "New high score!\n";
             highScore = tries;
+            tries = 0;
 
         }
         else if(highScore >= tries > 0){
-            highScore = tries;
 
+            std::cout << "New high score!\n";
+            highScore = tries;
+            tries = 0;
+
+        }
+        else if(highScore <= tries){
+            //We don't need to compare tries > 0 
+            // because if high score is less than tries then that implies tries > 0
+
+            // We can probably make this the 'else' block and remove the runtime error
+            // leaving it there just to track if there are outcomes we don't account for
+            std::cout << "You didn't beat your high score :/ \n";
+            tries = 0;
         }
         else{
             throw std::runtime_error("ERROR Occured during high score calculation...\n high score: " + std::to_string(highScore) + "\n tries this round: " + std::to_string(tries) + "\n");
         }
 
-        std::cout << "Your current high score is " << highScore << "\n";
+        std::cout << "Your current high score is " << highScore << "\n\n\n\n\n";
 
         //Ask if you would like to try again
         std::cout << "Would you like to go again?(y/n) ";
