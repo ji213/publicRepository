@@ -5,6 +5,7 @@
 // 2. withdraw money
 // 3. check balance
 // 4. Brainstorm further functions later, such as check deposit, user accounts, etc.
+// 5. Convert balance in other currencies?
 
 // TODO: Add logging and validation in various spots
 // Input validation for various variables
@@ -96,16 +97,22 @@ int main (){
 
 
         // ask user if they would like to complete another function or exit loop
-        std::cout << "Would you like to execute another action?(y/n) ";
-        std::cin >> loop;
-        loop = tolower(loop);
+        while(true){
+            std::cout << "Would you like to execute another action?(y/n) ";
+            std::cin >> loop;
+            loop = tolower(loop);
 
-        // validate input
-        if(acceptedLoopInput.find(loop) != std::string::npos){
-            std::cout << "..... \n";
-        }
-        else {
-            throw std::runtime_error("ERROR !@#$ Invalid input received... try again next time \n");
+            // validate input
+            if(std::cin.fail() || acceptedLoopInput.find(loop) != std::string::npos){
+                std::cout << "..... \n";
+                break;
+            }
+            else {
+                std::cout << "ERROR !@#$ Invalid input received... try again \n";
+                std::cin.clear();
+                std::cin.ignore(256, '\n');
+                
+            }
         }
 
 
@@ -145,7 +152,7 @@ void depositToAccount(double& balance){
     //Ask user how much they would like to deposit
     int userInput;
 
-    std::cout << "You selected Deposit...\nHow much would you like to deposit";
+    std::cout << "You selected Deposit...\nHow much would you like to deposit? ";
     //TODO: add input validation here
     std::cin >> userInput;
 
