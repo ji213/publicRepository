@@ -1,4 +1,4 @@
-// Banking Program v1.0
+// Banking Program v1.1
 
 // Create banking program that allows user to perform the following:
 // 1. deposit money
@@ -9,6 +9,7 @@
 // TODO: Add logging and validation in various spots
 // Input validation for various variables
 // Try to replace runtime errors with second attempts rather then exiting
+// Add as much logic to functions as possible to simply main loop
 
 
 #include <iostream>
@@ -20,6 +21,8 @@
 double maxDepositAmount = 100000;
 
 //initialize functions
+
+void randomizeInitialBalance(double& balance);
 
 void checkBalance(double balance);
 
@@ -35,21 +38,16 @@ int main (){
     char loop;
     int userSelection;
     std::string acceptedLoopInput = "yYnN";
+    int validInput[3] = {1, 2, 3};
+    bool isValid;
     
-    //randomizer
-    srand(time(NULL));
+    
 
     // Welcome message
     std::cout << "***** Welcome to the Bank (v1.0) *****\n";
 
-    // Start users off with random amount in account
-    std::cout << "For now, we will put a random amount in your account to test basic functionality... \n";
-
-    std::cout << "Randomizing amount... \n";
-
-    //randomize account balance up to $1m
-    accountBalance = rand() % 1000000;
-
+    // Call randomize function to initialize balance
+    randomizeInitialBalance(accountBalance);
 
     std::cout << "Done! Your starting balance is ... $" << accountBalance << "\n";
 
@@ -57,10 +55,26 @@ int main (){
     //loop through all actions
     do{
         // ask user which action they would like to execute
-        std::cout << "What action would you like to take? \n1. Check Balance \n2. Withdraw $ \n3. Deposit $ \n";
+        while (true){
+            std::cout << "What action would you like to take? \n1. Check Balance \n2. Withdraw $ \n3. Deposit $ \n";
 
-        // TODO: Add validation on input
-        std::cin >> userSelection;
+            // TODO: Add validation on input
+            // eventually add comparison to array validInput
+            std::cin >> userSelection;
+            isValid = std::find(std::begin(validInput), std::end(validInput), userSelection) != std::end(validInput);
+            if(std::cin.fail() || !isValid){
+                std::cout << "Invalid input supplied... Please try again";
+                std::cin.clear();
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
+
+
+            }
+            else{
+                std::cout << "Successful input \n\n\n";
+                break;
+            }
+
+        }
 
         // call functions for option selected
         switch(userSelection){
@@ -102,6 +116,21 @@ int main (){
 
 
     return 0;
+}
+
+void randomizeInitialBalance(double& balance){
+
+    //randomizer
+    srand(time(NULL));
+
+    // Start users off with random amount in account
+    std::cout << "For now, we will put a random amount in your account to test basic functionality... \n";
+
+    std::cout << "Randomizing amount... \n";
+
+    //randomize account balance up to $1m
+    balance = rand() % 1000000;
+
 }
 
 void checkBalance(double balance){
