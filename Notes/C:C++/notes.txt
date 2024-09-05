@@ -80,3 +80,36 @@ switch(x)
 			default:
 				std::cout << "Enter in 1-10 only"
 		}
+
+ternary operator ?: 
+	replacement to an if/else statement
+	condition ? expression1 : expression 2
+	example
+		int grade = 50;
+		grade >= 60 ? std::cout << "Pass" : std::cout << "Fail";
+
+logical operators
+	&& = check if two conditions are true
+	|| = 'or'... check if at least one of the two conditions are true
+	!  = 'not' reverses the logical state of its operand
+
+do while loop
+	do some block of code first, then repeat again if condition is true. 
+
+for loop
+	for(int index = 1; i<=3; i++){}
+
+srand
+	https://cplusplus.com/reference/cstdlib/srand/
+
+overloaded Functions
+	
+
+local variables
+	declared inside a function or block
+
+global variables 
+	access in entire file
+	best to avoid if you can cause it pollutes global namespace
+
+--TODO: Start looking into data structures and algorithms in C++, and adding projects to the repository
