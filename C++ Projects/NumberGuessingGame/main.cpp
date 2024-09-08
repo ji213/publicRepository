@@ -1,16 +1,18 @@
-//Number Guessing Game v1.1
+//Number Guessing Game v1.2
 
 //ERROR LOG/ THINGS TO ADD
 // Error handling for incorrect character supplied?
 // Go through less expected workflow outcomes 
 ///  to see what other errors or issues need to be handled
 // Maybe store high scores associated with user accounts?
+// Wire up to db potentially
 // Time logging
 
 
 #include <iostream>
 #include <ctime>
 #include <stdexcept>
+#include <string>
 
 int main() {
 
@@ -20,35 +22,42 @@ int main() {
     int tries = 0;
     int highScore = 0;
     char loop = 'y';
+    double timeElapsed;
+
+    time_t startTime, endTime;
+
+    std::string acceptedInput = "yYnN";
 
     srand(time(NULL));
 
     std::cout << "***** NUMBER GUESSING GAME *****\n";
 
     do{
-        std::cout << "Are you ready to begin?(y/n) ";
-        std::cin >> loop;
 
-        loop = tolower(loop);
+        while(true){
+            std::cout << "Are you ready to begin?(y/n) ";
+            std::cin >> loop;
 
-        if(loop == 'y' | loop == 'n'){
-            if(loop == 'y'){
-                std::cout << "Starting game now... \n";
-            }
-            else {
-                std::cout << "Ending game... \n";
+            loop = tolower(loop);
+
+            if(std::cin.fail() || acceptedInput.find(loop) != std::string::npos){
                 break;
-            }
 
-        }
-        else {
-            //throw runtime error
-            throw std::runtime_error("ERROR !@#$ Invalid character supplied... try again next time \n");
+            }
+            else{
+                std::cout << "Error !@#$ Invalid input! Please try again\n\n";
+                std::cin.clear();
+                std::cin.ignore(256, '\n');
+            }
 
         }
 
         //Init random number
         num = (rand() % 100) + 1;
+
+        //Start timer
+        std::cout << "Timer has started...\n";
+        time(&startTime);
 
 
         do{
@@ -69,7 +78,12 @@ int main() {
 
         }while(guess != num);
 
+
+        time(&endTime);
+        timeElapsed = difftime(endTime, startTime);
         std::cout << "Well done! That took you " << tries << " tries!\n";
+        std::cout << "You took " << timeElapsed << " seconds...\n";
+        
 
         //Compare to high score
 
