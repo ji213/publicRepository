@@ -2,6 +2,7 @@
 #include <iostream>
 
 Stack::Stack(){
+        std::cout << "Stack creation began...\n";
         top = -1;
         for (int i = 0; i < 5; i++){
                 arr[i] = 0;
@@ -15,6 +16,8 @@ bool Stack::isEmpty(){
             else{
                 return false;
             }
+
+            //return false;
         }
 
 bool Stack::isFull(){
@@ -24,6 +27,8 @@ bool Stack::isFull(){
             else{
                 return false;
             }
+
+            //return false;
         }
 
 void Stack::push(int val){
@@ -62,6 +67,7 @@ int Stack::count(){
 int Stack::peek(int pos){
             if(isEmpty()){
                 std::cout << "Stack underflow \n\n";
+                return 0;
             }
             else{
                 return arr[pos];
