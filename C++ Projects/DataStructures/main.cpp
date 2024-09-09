@@ -1,6 +1,12 @@
-//  Data Structures v0.1
+//  Data Structures v0.2
 // In order to compile, need to call the class cpp files while compiling
 // ex command: g++ main.cpp stack.cpp -o main
+
+
+//ERROR LOG:
+//  Issue with display(), returning abnormal amount of data
+
+
 
 
 
@@ -35,37 +41,55 @@ int main(){
                 break;
             case 3:
                 //isEmpty
-                result = s1.isEmpty();
-                switch(result){
-                    case true:
-                        std::cout << "Stack is empty \n\n";
-                        break;
-                    case false:
-                        std::cout << "Stack is not empty \n\n";
-                        break;
-                    default:
-                        std::cout << "Unexpected outcome \n\n";
-
+                if(s1.isEmpty()){
+                    std::cout << "Stack is Empty\n\n";
+                }
+                else{
+                    std::cout << "Stack is not empty\n\n";
                 }
                 break;
             case 4:
                 //isFull
+                if(s1.isFull()){
+                    std::cout << "Stack is full\n";
+                }
+                else{
+                    std::cout << "Stack is not full\n";
+                }
                 break;
             case 5:
                 //peek
+                std::cout << "Enter the position of item you want to peek\n";
+                std::cin >> position;
+
+                std::cout << "Peek function called...\n Value at position " << position << " : " << s1.peek(position) << "\n\n";
                 break;
             case 6:
                 //count
+                std::cout << "Count function called ...\n Number of items in the Stack are: " << s1.count() << "\n\n";
                 break;
             case 7:
                 //change
+                std::cout << "Change function called...\n Enter the position of the item you want to change: ";
+                std::cin >> position;
+
+                std::cout << "\n";
+                std::cout << "Enter the value of item you want to change: ";
+                std::cin >> value;
+
+                s1.change(position, value);
                 break;
             case 8:
                 //display
+                std::cout << "Display function called - \n";
+                s1.display();
                 break;
             case 9:
                 //clear screen
+                system("cls");
                 break;
+            default:
+                std::cout << "Please enter correct option number\n\n";
 
 
         }
