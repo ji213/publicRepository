@@ -1,4 +1,4 @@
-//  Data Structures v0.2
+//  Data Structures v0.3
 // In order to compile, need to call the class cpp files while compiling
 // ex command: g++ main.cpp stack.cpp -o main
 
@@ -13,6 +13,7 @@
 #include <iostream>
 #include <string>
 #include "stack.h"
+#include "queue.h"
 
 
 
@@ -95,6 +96,8 @@ int main(){
         }
 
     }while(option != 0);
+
+    //Queue Logic
 
 
     return 0;
