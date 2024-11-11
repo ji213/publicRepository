@@ -1,6 +1,9 @@
 /*
-    Linked List Implementation v1.0
+    Linked List Implementation v1.2
     Utilize Recursive functions
+
+    -- Added function to swap pairs, however it hasn't passed testing yet so it is not implemented
+    -- simplified language to make links easier to understand
 */
 
 #include <iostream>
@@ -41,44 +44,83 @@ public:
         }
         
     }
+
+    Node* swapPairs(Node* head) {
+
+        // This method hasnt passed testing yet
+        if(head == NULL || head->next == NULL){
+            return head;
+        }
+
+        Node* temp = head->next;
+        head->next = swapPairs(temp->next);
+        temp->next = head;
+
+        return temp;
+
+        
+    }
 };
 
 int main(){
     // Init head node
-    Node* head = new Node;
+    Node* node1 = new Node();
     // Init node contents
-    head->contents = 100;
+    node1->contents = 1;
     // set head->next to null, meaning there is no node next in the chain
-    head->next = nullptr;
+    node1->next = nullptr;
 
 
     // init tail node
-    Node* tail = new Node();
-    tail->contents = 200;
-    tail->next = nullptr;
+    Node* node2 = new Node();
+    node2->contents = 2;
+    node2->next = nullptr;
 
     // now we link the head to the tail
-    head->next = tail;
 
     // second node Head
-    Node* secondHead = new Node;
-    secondHead->contents = 50;
-    secondHead->next = nullptr;
+    Node* node3 = new Node();
+    node3->contents = 3;
+    node3->next = nullptr;
 
     // second node tail
-    Node* secondTail = new Node;
-    secondTail -> contents = 150;
-    secondTail -> next = nullptr;
+    Node* node4 = new Node();
+    node4 -> contents = 4;
+    node4 -> next = nullptr;
 
     // Connect second head to second tail, secondTail is the next node in that list
-    secondHead -> next = secondTail;
+    // secondHead -> next = secondTail;
+    // link nodes here
+    node1->next = node2;
+    node3->next = node4;
+
+
 
     Solution s;
 
     Node* result = new Node();
 
     // call recursive merge function
-    result = s.mergeTwoLists(head, secondHead);
+    //result = s.mergeTwoLists(node1, node3);
+
+    /* std::cout << "Input before result function node1: \n\n";
+    while(node1){
+        //output results
+        std::cout << node1->contents << "\n";
+        node1 = node1->next;
+    }
+
+    std::cout << "Input before result function node3: \n\n";
+    while(node3){
+        //output results
+        std::cout << node3->contents << "\n";
+        node3 = node3->next;
+    }
+
+    */
+
+    //result = s.swapPairs(node1);
+    result = s.mergeTwoLists(node1, node3);
 
     std::cout << "Result output: \n\n";
     while(result){
