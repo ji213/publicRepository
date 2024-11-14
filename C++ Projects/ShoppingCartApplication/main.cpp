@@ -1,10 +1,10 @@
 /*
-    Shopping Cart Application v1.0
+    Shopping Cart Application v1.1
 
     ToDo:
         Add error handling for all user input
         user input validation
-        function to clear cart 
+        Adding space to itemName string seems to cause infinite glitch loop
 
 */
 
@@ -91,7 +91,17 @@ class Cart {
             }
 
             std::cout << "Total: $ " << total << std::endl;
+        }
 
+        //Clear cart
+        void clearCart(){
+            Item* currentptr = head;
+            while(currentptr != nullptr){
+                head = currentptr->next;
+
+                delete currentptr;
+                currentptr = head;
+            }
         }
 };
 
@@ -109,7 +119,7 @@ int main(){
     std::cout << "SHOPPING CART APPLICATION...\n\n";
 
     while(useroption > 0){
-        std::cout << "\n\nPlease select an action..\n 1. Add item to cart\n 2. Display Cart\n 3. Remove item from cart\n Enter 0 to exit \n";
+        std::cout << "\n\nPlease select an action..\n 1. Add item to cart\n 2. Display Cart\n 3. Remove item from cart\n 4. Empty Cart\n Enter 0 to exit \n";
 
         std::cin >> useroption;
         switch(useroption){
@@ -137,6 +147,10 @@ int main(){
                 std::cout << "What item would you like to remove? ";
                 std::cin >> itemtoremove;
                 userCart.removeItem(itemtoremove);
+                break;
+            case 4:
+                // Clear Cart
+                userCart.clearCart();
                 break;
             default:
                 std::cout << "Error! Please enter valid input";
